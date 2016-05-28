@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html ng-app="demoAppModule">
+<head>
+    <title></title>
+   
+
+</head>
+<body>
+    <div >
+        <div ng-view="" ></div>
+    </div>
+
+     <script src="Scripts/angular.min.js"></script>
+      <script src="Scripts/angular-route.min.js"></script>
+    <script>
+
+        var myApp = angular.module('demoAppModule', []);
+        myApp.config(function ($routeProvider) {
+            $routeProvider
+                .when('/view1',
+            {
+                controller: 'SimpleController', //'SimpleControllerInfo',
+                templateUrl: 'Partials/View1.html'
+            })
+            .when('/view2',
+            {
+                controller: 'SimpleController',
+                templateUrl: 'Partials/View2.html'
+            }
+            )
+            .otherwise({ redirectTo: '/view1' });
+        });
+
+        var controllers = {};
+        controllers.SimpleControllerInfo = function ($scope) {
+            $scope.CustomerInfo = [
+                           { name: 'pinki sharma info', city: 'gurgaon' },
+                           { name: 'pinki jain info', city: 'delhi' },
+                           { name: 'pinki aggarwal info', city: 'kurusketra' },
+                           { name: 'charu sharma info', city: 'ambala' }
+            ];
+
+            $scope.AddCustomerInfo = function () {
+                $scope.CustomerInfo.push({ name: $scope.NewCustomerInfo.name, city: $scope.NewCustomerInfo.city });
+            }
+
+        }
+
+        controllers.SimpleController = function ($scope) {
+            $scope.Customer = [
+                { name: 'pinki sharma', city: 'gurgaon' },
+                           { name: 'pinki jain', city: 'delhi' },
+                           { name: 'pinki aggarwal', city: 'kurusketra' },
+                           { name: 'charu sharma', city: 'ambala' }
+
+            ];
+            $scope.AddCustomer = function () {
+                $scope.Customer.push({ name: $scope.NewCustomer.name, city: $scope.NewCustomer.city });
+            }
+        }
+
+        myApp.controller(controllers);
+
+        //myApp.controller("SimpleControllerInfo", function ($scope)
+        //{
+        //    $scope.CustomerInfo = [
+        //                    { name: 'pinki sharma', city: 'gurgaon' },
+        //                    { name: 'pinki jain', city: 'delhi' },
+        //                    {name :'pinki aggarwal',city:'kurusketra'},
+        //                    {name :'charu sharma',city:'ambala'}
+        //    ];
+        //}
+        //);      
+
+        </script>
+</body>
+</html>
